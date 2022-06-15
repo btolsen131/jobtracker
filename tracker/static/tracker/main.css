@@ -35,3 +35,7 @@ ul {
     border-radius: 3px;
     margin-bottom: 20px;
   }
+#search{
+  margin-right: 0px;
+  margin-left: auto;
+}
