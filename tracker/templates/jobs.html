@@ -1,0 +1,12 @@
+{% extends tracker/base.html %}
+{% block content %}
+{% for job in jobs %}
+
+<article class="media content-section position-relative">
+    <div class="media-body">
+        <h5> {{ job.company_name }} </h5>
+        <h6> {{ job.position_name }}</h6>
+        <p>Interviews:</p>
+    </div>
+</article>
+{% endblock content %}
