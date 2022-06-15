@@ -1,0 +1,20 @@
+{% extends 'tracker/base.html' %}
+{% block content %}
+
+<article class="media content-section">
+    <div class="media-body">
+        Position: {{ job.position_name }}
+        Company: {{ job.company_name }}
+        <small class="text-muted"> Applied: {{ job.date_applied }}</small> 
+        <p> Location: {{ job.location }}</p>
+    </div>
+</article>
+    {% for interview in interviews %}
+    
+    <p> {{ interview.interviewer }}</p>
+    <p> {{ interview.interview_date }}</p>
+    <p> {{ interview.thoughts }}</p>
+    {% endfor %}
+
+
+{% endblock content %}

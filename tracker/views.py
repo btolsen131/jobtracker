@@ -26,6 +26,19 @@ class JobCreateView(SuccessMessageMixin, CreateView):
     def get_success_url(self):
         return reverse('job-list')
 
+class JobDetailView(View):
+    def get(self, request, pk, *args, **kwargs):
+        job = Job.objects.get(pk=pk)
+        interviews = Interview.objects.filter(job=job)
+
+        context ={
+            'job':job,
+            'interviews':interviews
+        }
+
+        return render(request, 'tracker/job_detail.html', context)
+        
+
 class JobSearch(View):
     def get(self, request, *args, **kwargs):
         query = self.request.GET.get('query')
