@@ -6,7 +6,7 @@
     <div class="media-body">
         <h5> {{ job.company_name }} </h5>
         <h6> {{ job.position_name }}</h6>
-        <p>Interviews:</p>
+        <p>Interviews: {{job.interview_set.all|length}}</p>
     </div>
 </article>
 {% endfor %}
