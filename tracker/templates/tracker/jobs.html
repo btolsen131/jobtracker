@@ -1,4 +1,4 @@
-{% extends tracker/base.html %}
+{% extends 'tracker/base.html' %}
 {% block content %}
 {% for job in jobs %}
 
@@ -9,4 +9,5 @@
         <p>Interviews:</p>
     </div>
 </article>
+{% endfor %}
 {% endblock content %}

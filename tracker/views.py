@@ -11,5 +11,5 @@ class JobListView(View):
             'jobs':jobs
         }
 
-        return render(request, '/jobs.html', context=context)
+        return render(request, 'tracker/jobs.html', context=context)
 

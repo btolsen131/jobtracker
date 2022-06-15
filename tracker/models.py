@@ -9,7 +9,7 @@ class Job(models.Model):
     applied_via = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.position_name
+        return f'{self.position_name} @ {self.company_name}'
 
 class Interview(models.Model):
     interview_date = models.DateTimeField()
