@@ -7,7 +7,8 @@ class Job(models.Model):
     location = models.CharField(max_length=250)
     date_applied = models.DateTimeField(default=timezone.now)
     applied_via = models.CharField(max_length=200)
-
+    rejected = models.BooleanField(default=False)
+    
     def __str__(self):
         return f'{self.position_name} @ {self.company_name}'
 
