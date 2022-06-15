@@ -3,4 +3,4 @@ from .models import Job, Interview
 # Register your models here.
 
 admin.site.register(Job)
-admin.site.registter(Interview)
+admin.site.register(Interview)
