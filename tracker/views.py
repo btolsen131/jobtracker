@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Job, Interview
 from django.views.generic import View, CreateView
 from django.urls import reverse, reverse_lazy
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
@@ -25,3 +25,14 @@ class JobCreateView(SuccessMessageMixin, CreateView):
     # returning redirect to job list after job is added
     def get_success_url(self):
         return reverse('job-list')
+
+class JobSearch(View):
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('query')
+        job_list = Job.objects.filter(Q(position_name__icontains=query))
+
+        context = {
+            'job_list':job_list
+        }
+
+        return render(request, 'tracker/search.html', context)

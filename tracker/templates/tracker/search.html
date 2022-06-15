@@ -1,0 +1,17 @@
+{% extends "tracker/base.html" %}
+
+{% block content %} 
+
+<div class="container">
+    {% for job in job_list %}
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-5 col-sm-12 border-bottom position-relative">
+                <p>{{ job.position_name }} @ {{ job.company_name }}</p>
+                <small class="text-muted sm">Applied on: {{ job.date_applied }}</small>
+
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
