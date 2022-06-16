@@ -8,6 +8,9 @@
         <small class="text-muted"> Applied: {{ job.date_applied }}</small> 
         <p> Location: {{ job.location }}</p>
     </div>
+    <form action="{% url 'add-interview' job.pk %}">
+        <button type="submit" value="{{job.pk}}" class="btn btn-sm btn-success">Add Interview</button>
+    </form>
 </article>
     {% for interview in interviews %}
     

@@ -14,7 +14,7 @@ class Job(models.Model):
 
 class Interview(models.Model):
     interview_date = models.DateTimeField()
-    interviwer = models.CharField(max_length=200)
+    interviewer = models.CharField(max_length=200)
     type = models.CharField(max_length=200)
     thoughts = models.TextField(null=True, blank=True)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)

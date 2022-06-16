@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import pkg_resources
 from .models import Job, Interview
 from django.views.generic import View, CreateView
 from django.urls import reverse, reverse_lazy
@@ -37,7 +38,7 @@ class JobDetailView(View):
         }
 
         return render(request, 'tracker/job_detail.html', context)
-        
+
 
 class JobSearch(View):
     def get(self, request, *args, **kwargs):
@@ -49,3 +50,18 @@ class JobSearch(View):
         }
 
         return render(request, 'tracker/search.html', context)
+
+class InterviewCreateView(SuccessMessageMixin, CreateView):
+    model = Interview
+    fields=['interview_date', 'interviewer', 'type', 'thoughts', ]
+    success_message = "Interview added, Good luck"
+    template_name: 'interview_form.html'
+
+    
+    def form_valid(self, form):
+        form.instance.job_id = self.kwargs['pk']
+        return super(InterviewCreateView, self).form_valid(form)
+
+    # returning redirect to job list after job is added
+    def get_success_url(self):
+            return reverse('job-detail', args=[self.kwargs['pk']])
