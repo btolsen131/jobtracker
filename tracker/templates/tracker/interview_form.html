@@ -1,6 +1,9 @@
 {% extends "tracker/base.html" %}
 {% load crispy_forms_tags %}
-{% block content %}    
+{% block content %} 
+   <div class="form-group mt-2">
+         <a class="btn btn-outline-info mb-3" href="{% url 'job-detail' prev_job %}" >Back to job</a>
+    </div>
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -10,9 +13,14 @@
                 </legend>
                 {{ form|crispy }}
             </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit"> Add Interview </button>
+            <div class="form-group mt-3">
+                <button class="btn btn-success" type="submit"> Add Interview </button>
             </div>
         </form>
     </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location)
+        const pk_of_job = urlParams.get('pk')
+       
+    </script>
 {% endblock content %}

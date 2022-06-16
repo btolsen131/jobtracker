@@ -65,3 +65,8 @@ class InterviewCreateView(SuccessMessageMixin, CreateView):
     # returning redirect to job list after job is added
     def get_success_url(self):
             return reverse('job-detail', args=[self.kwargs['pk']])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['prev_job'] = self.kwargs['pk']
+        return context
