@@ -3,9 +3,9 @@
 
 <article class="media content-section">
     <div class="media-body">
-        Position: {{ job.position_name }}
-        Company: {{ job.company_name }}
-        <small class="text-muted"> Applied: {{ job.date_applied }}</small> 
+        Position: {{ job.position_name }} <br>
+        Company: {{ job.company_name }} <br>
+        <small class="text-muted"> Applied: {{ job.date_applied|date:"M d, Y" }} via {{ job.applied_via }}</small> 
         <p> Location: {{ job.location }}</p>
     </div>
     <form action="{% url 'add-interview' job.pk %}">
@@ -15,7 +15,7 @@
     {% for interview in interviews %}
     
     <p> {{ interview.interviewer }}</p>
-    <p> {{ interview.interview_date }}</p>
+    <p> {{ interview.interview_date|date:"M d, Y" }}</p>
     <p> {{ interview.thoughts }}</p>
     {% endfor %}
 
