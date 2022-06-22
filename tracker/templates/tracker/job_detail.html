@@ -11,6 +11,13 @@
     <form action="{% url 'add-interview' job.pk %}">
         <button type="submit" value="{{job.pk}}" class="btn btn-sm btn-success">Add Interview</button>
     </form>
+    <form action="{% url 'job-rejected' job.pk %}">
+        {% if job.rejected %}
+        <button class="btn btn-outline-success ">Back in the running</button>
+        {% else %}
+        <button class="btn btn-outline-danger ">Rejected</button>
+        {% endif %}
+    </form>
 </article>
     {% for interview in interviews %}
     

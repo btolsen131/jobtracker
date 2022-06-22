@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import pkg_resources
 from .models import Job, Interview
 from django.views.generic import View, CreateView
 from django.urls import reverse, reverse_lazy
 from django.db.models import Count, Q
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 # Create your views here.
 class JobListView(View):
@@ -70,3 +71,22 @@ class InterviewCreateView(SuccessMessageMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['prev_job'] = self.kwargs['pk']
         return context
+
+#view to change boolean of "rejected" in DB model
+def rejectedView(request, pk, *args, **kwargs):
+    try: 
+        job = Job.objects.get(pk=pk)
+        
+        #checking if i was already rejected and setting accordingly
+        if job.rejected == True:
+            job.rejected = False
+        else:
+            job.rejected = True
+        
+        job.save()
+        messages.success(request, f'You didnt want to work for {job.company_name} anyway!')
+        return redirect('job-list')
+    except:
+        messages.error(request, f'Something went wrong')
+        return ('jobs/{pk}')
+    
