@@ -5,26 +5,31 @@
     <div class="media-body">
         Position: {{ job.position_name }} <br>
         Company: {{ job.company_name }} <br>
-        <small class="text-muted"> Applied: {{ job.date_applied|date:"M d, Y" }} via {{ job.applied_via }}</small> 
+        <small class="text-muted"> Applied: {{ job.date_applied|date:"M d, Y" }} via {{ job.applied_via }}</small>
         <p> Location: {{ job.location }}</p>
     </div>
-    <form action="{% url 'add-interview' job.pk %}">
+    <div class="d-flex justify-content-between">
+    <form action="{% url 'add-interview' job.pk %}" >
         <button type="submit" value="{{job.pk}}" class="btn btn-sm btn-success">Add Interview</button>
     </form>
-    <form action="{% url 'job-rejected' job.pk %}">
+    <form action="{% url 'job-rejected' job.pk %}" >
         {% if job.rejected %}
-        <button class="btn btn-outline-success ">Back in the running</button>
+        <button class="btn btn-outline-success btn-sm ">Back in the running</button>
         {% else %}
-        <button class="btn btn-outline-danger ">Rejected</button>
+        <button class="btn btn-outline-danger btn-sm">Rejected</button>
         {% endif %}
     </form>
+    </div>
 </article>
-    {% for interview in interviews %}
-    
-    <p> {{ interview.interviewer }}</p>
-    <p> {{ interview.interview_date|date:"M d, Y" }}</p>
-    <p> {{ interview.thoughts }}</p>
-    {% endfor %}
 
+    {% for interview in interviews %}
+    <div class="card">
+        <div class="card-body">
+    <h4 class="card-title"> Interviewer: {{ interview.interviewer }}</h4>
+    <p class="card-subtitle mb-2 text-muted" > {{ interview.interview_date|date:"M d, Y" }}</p>
+    <p class="card-text">{{ interview.thoughts }}</p>
+    {% endfor %}
+            </div>
+    </div>
 
 {% endblock content %}

@@ -12,9 +12,10 @@ class JobListView(View):
     def get(self, request, *args, **kwargs):
         jobs = Job.objects.all().order_by('-date_applied')
         interviews = Job.objects.annotate(num_of_interviews=Count('interview'))
-        
+
         context = {
-            'jobs':jobs
+            'jobs':jobs,
+            
         }
 
         return render(request, 'tracker/jobs.html', context=context)
@@ -58,7 +59,7 @@ class InterviewCreateView(SuccessMessageMixin, CreateView):
     success_message = "Interview added, Good luck"
     template_name: 'interview_form.html'
 
-    
+
     def form_valid(self, form):
         form.instance.job_id = self.kwargs['pk']
         return super(InterviewCreateView, self).form_valid(form)
@@ -74,19 +75,18 @@ class InterviewCreateView(SuccessMessageMixin, CreateView):
 
 #view to change boolean of "rejected" in DB model
 def rejectedView(request, pk, *args, **kwargs):
-    try: 
+    try:
         job = Job.objects.get(pk=pk)
-        
+
         #checking if i was already rejected and setting accordingly
         if job.rejected == True:
             job.rejected = False
         else:
             job.rejected = True
-        
+
         job.save()
         messages.success(request, f'You didnt want to work for {job.company_name} anyway!')
         return redirect('job-list')
     except:
         messages.error(request, f'Something went wrong')
         return ('jobs/{pk}')
-    
