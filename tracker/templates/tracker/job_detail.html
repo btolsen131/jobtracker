@@ -21,15 +21,16 @@
     </form>
     </div>
 </article>
-
+{% if interviews %}
+<h5>Interviews:</h5>
+{% endif %}
     {% for interview in interviews %}
-    <div class="card">
+    <div class="card mb-2">
         <div class="card-body">
     <h4 class="card-title"> Interviewer: {{ interview.interviewer }}</h4>
     <p class="card-subtitle mb-2 text-muted" > {{ interview.interview_date|date:"M d, Y" }}</p>
     <p class="card-text">{{ interview.thoughts }}</p>
-    {% endfor %}
-            </div>
+        </div>
     </div>
-
+{% endfor %}
 {% endblock content %}
